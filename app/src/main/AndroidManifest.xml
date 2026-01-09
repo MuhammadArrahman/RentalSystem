@@ -13,6 +13,9 @@
         android:theme="@style/Theme.RentalSystem"
         tools:targetApi="31">
         <activity
+            android:name=".VerikasiDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".adapter.DashboardActivity"
             android:exported="false" />
         <activity
