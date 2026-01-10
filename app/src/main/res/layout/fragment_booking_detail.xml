@@ -192,25 +192,62 @@
                         android:orientation="horizontal">
 
                         <LinearLayout
-                            android:layout_width="0dp"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:background="@drawable/bg_payment_selected"
-                            android:gravity="center"
-                            android:padding="12dp">
+                            android:layout_marginTop="12dp"
+                            android:orientation="horizontal">
 
-                            <ImageView
-                                android:layout_width="24dp"
-                                android:layout_height="24dp"
-                                android:src="@drawable/ic_wallet" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
+                            <LinearLayout
+                                android:id="@+id/layoutOnline"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="8dp"
-                                android:text="Online"
-                                android:textColor="@android:color/black"
-                                android:textStyle="bold" />
+                                android:layout_weight="1"
+                                android:background="@drawable/bg_payment_selected"
+                                android:gravity="center"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:padding="12dp">
+
+                                <ImageView
+                                    android:layout_width="24dp"
+                                    android:layout_height="24dp"
+                                    android:src="@drawable/ic_wallet" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="8dp"
+                                    android:text="Online"
+                                    android:textColor="@android:color/black"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+
+                            <Space
+                                android:layout_width="12dp"
+                                android:layout_height="wrap_content" />
+
+                            <LinearLayout
+                                android:id="@+id/layoutCash"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="@drawable/bg_input_field"
+                                android:gravity="center"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:padding="12dp">
+
+                                <ImageView
+                                    android:layout_width="24dp"
+                                    android:layout_height="24dp"
+                                    android:src="@drawable/ic_cash" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="8dp"
+                                    android:text="Tunai (Cash)" />
+                            </LinearLayout>
                         </LinearLayout>
 
                         <Space
