@@ -21,7 +21,7 @@
             android:layout_height="48dp"
             android:background="#F8F9FD"
             android:padding="10dp"
-            android:src="@drawable/ic_car_side" />
+            android:src="@drawable/ic_placeholder" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -59,11 +59,11 @@
                 android:id="@+id/tvStatusSewa"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_status_green"
+                android:background="@drawable/bg_btn_green"
                 android:paddingHorizontal="10dp"
                 android:paddingVertical="4dp"
                 android:text="Berjalan"
-                android:textColor="#2E7D32"
+                android:textColor="#000"
                 android:textSize="12sp"/>
 
             <TextView
