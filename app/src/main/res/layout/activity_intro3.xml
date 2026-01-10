@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerInside"
-            android:src="@drawable/illustration_woman_car"
+            android:src="@drawable/por"
             android:padding="40dp"
             android:contentDescription="Woman presenting white car"/>
     </LinearLayout>
@@ -142,6 +142,8 @@
 
             <TextView
                 android:id="@+id/tvLogin"
+                android:minHeight="20dp"
+                android:minWidth="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Masuk"

@@ -9,7 +9,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -85,7 +84,6 @@ public class FragmentInforAkun extends Fragment {
                 }, year, month, day);
         datePickerDialog.show();
     }
-
     private void performSaveAction() {
         String nama = etNama.getText().toString().trim();
         String email = etEmail.getText().toString().trim();
@@ -99,7 +97,6 @@ public class FragmentInforAkun extends Fragment {
             etEmail.setError("Email tidak boleh kosong");
             return;
         }
-
         // Simulasikan proses simpan
         Toast.makeText(getContext(), "Perubahan Berhasil Disimpan", Toast.LENGTH_SHORT).show();
     }
