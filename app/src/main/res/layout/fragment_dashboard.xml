@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8F9FB">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="80dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp">
+            <TextView
+                android:id="@+id/tvLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lokasi Anda"
+                android:textSize="12sp"
+                android:textColor="#999999" />
+            <TextView
+                android:layout_below="@id/tvLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Jakarta, Indonesia"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:drawableStart="@drawable/ic_location"
+                android:drawablePadding="6dp" />
+            <ImageView
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:padding="10dp"
+                android:background="@drawable/bg_circle_white"
+                android:src="@drawable/ic_notifications" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="20dp"
+            android:orientation="horizontal">
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="55dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_search"
+                android:hint="Cari mobil impianmu..."
+                android:paddingHorizontal="16dp"
+                android:drawableStart="@drawable/ic_search"
+                android:drawablePadding="12dp" />
+            <ImageButton
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_marginStart="12dp"
+                android:background="@drawable/bg_button_blue"
+                android:src="@drawable/ic_filter"
+                app:tint="@android:color/white" />
+        </LinearLayout>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="170dp"
+            android:layout_margin="20dp"
+            app:cardCornerRadius="20dp">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/banner_car"
+                android:scaleType="centerCrop" />
+        </androidx.cardview.widget.CardView>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="20dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Populer Terdekat"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black" />
+            <TextView
+                android:layout_alignParentEnd="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lihat Semua"
+                android:textColor="#2970FF" />
+        </RelativeLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvDashboard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:nestedScrollingEnabled="false" />
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>
