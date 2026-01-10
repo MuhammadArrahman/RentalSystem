@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RiwayatBookingFragment extends Fragment {
-
     private RecyclerView rvRiwayat;
     private AdapterRiwayatBooking adapter;
     private List<RiwayatBookingModel> dataList;
