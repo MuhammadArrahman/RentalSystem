@@ -53,8 +53,8 @@ public class MainActivity extends AppCompatActivity {
         menus.add(new MenuModel("Dashboard", R.drawable.ic_dashboard, false));
         menus.add(new MenuModel("Verifikasi", R.drawable.ic_verify, false));
         menus.add(new MenuModel("Armada", R.drawable.ic_armada, true)); // Set true untuk menu aktif pertama
-        //menus.add(new MenuModel("Pesanan", R.drawable.ic_pesanan, false));
-        //menus.add(new MenuModel("Profil", R.drawable.ic_pengaturan, false));
+        menus.add(new MenuModel("Pesanan", R.drawable.ic_order, false));
+        menus.add(new MenuModel("Profil", R.drawable.ic_profile, false));
 
         // Set Adapter
         BottomMenuAdapter adapter = new BottomMenuAdapter(menus);

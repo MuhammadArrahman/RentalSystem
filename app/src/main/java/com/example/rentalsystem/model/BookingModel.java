@@ -1,26 +1,25 @@
 package com.example.rentalsystem.model;
 
 public class BookingModel {
-    private String namaUser, bookingId, status, namaMobil, platWarna, tanggal, durasi, harga;
+    private String kategori, nama, harga, kursi, transmisi, bbm;
+    private int gambarRes;
 
-    public BookingModel(String namaUser, String bookingId, String status, String namaMobil, String platWarna, String tanggal, String durasi, String harga) {
-        this.namaUser = namaUser;
-        this.bookingId = bookingId;
-        this.status = status;
-        this.namaMobil = namaMobil;
-        this.platWarna = platWarna;
-        this.tanggal = tanggal;
-        this.durasi = durasi;
+    public BookingModel(String kategori, String nama, String harga, String kursi, String transmisi, String bbm, int gambarRes) {
+        this.kategori = kategori;
+        this.nama = nama;
         this.harga = harga;
+        this.kursi = kursi;
+        this.transmisi = transmisi;
+        this.bbm = bbm;
+        this.gambarRes = gambarRes;
     }
 
-    // Getters yang diperlukan oleh Adapter
-    public String getNamaUser() { return namaUser; }
-    public String getStatus() { return status; }
-    public String getNamaMobil() { return namaMobil; }
-    public String getBookingId() { return bookingId; } // Tambahkan ini
-    public String getPlatWarna() { return platWarna; } // Tambahkan ini
-    public String getTanggal() { return tanggal; }     // Tambahkan ini
-    public String getDurasi() { return durasi; }       // Tambahkan ini
-    public String getHarga() { return harga; }         // Tambahkan ini
+    // Getter untuk Adapter
+    public String getKategori() { return kategori; }
+    public String getNama() { return nama; }
+    public String getHarga() { return harga; }
+    public String getKursi() { return kursi; }
+    public String getTransmisi() { return transmisi; }
+    public String getBbm() { return bbm; }
+    public int getGambarRes() { return gambarRes; }
 }
