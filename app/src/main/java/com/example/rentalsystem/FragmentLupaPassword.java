@@ -1,5 +1,6 @@
 package com.example.rentalsystem;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,21 +27,18 @@ public class FragmentLupaPassword extends Fragment {
             @Nullable ViewGroup container,
             @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(
-                R.layout.fragment_lupa_password,
-                container,
-                false
-        );
+        // Inflate layout fragment
+        View view = inflater.inflate(R.layout.fragment_lupa_password, container, false);
 
-        // Firebase
+        // Inisialisasi Firebase Auth
         mAuth = FirebaseAuth.getInstance();
 
-        // View
+        // Inisialisasi View
         EditText etEmail = view.findViewById(R.id.etEmailForgot);
         Button btnSend = view.findViewById(R.id.btnSend);
         ImageView btnBack = view.findViewById(R.id.btnBack);
 
-        // Kirim reset password
+        // 1. Tombol kirim reset password
         btnSend.setOnClickListener(v -> {
             String email = etEmail.getText().toString().trim();
 
@@ -52,27 +50,29 @@ public class FragmentLupaPassword extends Fragment {
 
             mAuth.sendPasswordResetEmail(email)
                     .addOnSuccessListener(unused ->
-                            Toast.makeText(
-                                    getContext(),
-                                    "Email reset password berhasil dikirim",
-                                    Toast.LENGTH_LONG
-                            ).show()
+                            Toast.makeText(getContext(), "Email reset password berhasil dikirim", Toast.LENGTH_LONG).show()
                     )
                     .addOnFailureListener(e ->
-                            Toast.makeText(
-                                    getContext(),
-                                    e.getMessage(),
-                                    Toast.LENGTH_LONG
-                            ).show()
+                            Toast.makeText(getContext(), "Gagal mengirim email: " + e.getMessage(), Toast.LENGTH_LONG).show()
                     );
         });
 
-        // Back ke Login
-        btnBack.setOnClickListener(v ->
-                requireActivity()
-                        .getSupportFragmentManager()
-                        .popBackStack()
-        );
+        // 2. Tombol back → Pindah ke LoginActivity (Bukan Fragment)
+        btnBack.setOnClickListener(v -> {
+            // Menggunakan Intent untuk pindah ke Activity
+            Intent intent = new Intent(getActivity(), LoginActivity.class);
+
+            // Flag ini memastikan jika user menekan back di LoginActivity,
+            // mereka tidak akan kembali lagi ke halaman Lupa Password.
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+
+            startActivity(intent);
+
+            // Menutup activity saat ini yang menampung fragment lupa password
+            if (getActivity() != null) {
+                getActivity().finish();
+            }
+        });
 
         return view;
     }
