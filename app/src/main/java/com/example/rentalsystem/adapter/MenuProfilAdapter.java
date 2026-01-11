@@ -1,63 +1,80 @@
 package com.example.rentalsystem.adapter;
 
-import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.example.rentalsystem.R;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.rentalsystem.R;
 import com.example.rentalsystem.model.MenuProfilModel;
 
 import java.util.List;
 
-public class MenuProfilAdapter extends RecyclerView.Adapter<MenuProfilAdapter.ViewHolder> {
-    private List<MenuProfilModel> menuList;
+public class MenuProfilAdapter
+        extends RecyclerView.Adapter<MenuProfilAdapter.ViewHolder> {
 
-    public MenuProfilAdapter(List<MenuProfilModel> menuList) {
-        this.menuList = menuList;
+    public interface OnMenuClickListener {
+        void onMenuClick(MenuProfilModel model);
+    }
+
+    private List<MenuProfilModel> list;
+    private OnMenuClickListener listener;
+
+    public MenuProfilAdapter(
+            List<MenuProfilModel> list,
+            OnMenuClickListener listener) {
+        this.list = list;
+        this.listener = listener;
     }
 
     @NonNull
     @Override
-    public MenuProfilAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_menu_profil, parent, false);
-        return new ViewHolder(view);
+    public ViewHolder onCreateViewHolder(
+            @NonNull ViewGroup parent,
+            int viewType) {
+
+        View v = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_menu_profil, parent, false);
+        return new ViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        MenuProfilModel item = menuList.get(position);
+    public void onBindViewHolder(
+            @NonNull ViewHolder holder,
+            int position) {
 
-        holder.tvJudul.setText(item.getJudul());
-        holder.tvSub.setText(item.getSubJudul());
-        holder.ivIkon.setImageResource(item.getIkon());
+        MenuProfilModel item = list.get(position);
 
-        // Pastikan ivIkon di XML memiliki android:background agar tidak NullPointerException
-        if (holder.ivIkon.getBackground() != null) {
-            holder.ivIkon.getBackground().setColorFilter(Color.parseColor(item.getWarnaHex()), PorterDuff.Mode.SRC_IN);
-        }
+        holder.tvMenu.setText(item.getTitle());
+        holder.tvSubMenu.setText(item.getSubtitle());
+        holder.ivMenu.setImageResource(item.getIconRes());
 
+        holder.itemView.setOnClickListener(v -> {
+            if (listener != null) {
+                listener.onMenuClick(item);
+            }
+        });
     }
+
     @Override
     public int getItemCount() {
-        return menuList.size();
+        return list.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvJudul, tvSub;
-        ImageView ivIkon;
+    static class ViewHolder extends RecyclerView.ViewHolder {
 
-        public ViewHolder(@NonNull View itemView) {
+        ImageView ivMenu;
+        TextView tvMenu, tvSubMenu;
+
+        ViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvJudul = itemView.findViewById(R.id.tvMenu);
-            tvSub = itemView.findViewById(R.id.tvSubMenu);
-            ivIkon = itemView.findViewById(R.id.ivMenu);
+            ivMenu = itemView.findViewById(R.id.ivMenu);
+            tvMenu = itemView.findViewById(R.id.tvMenu);
+            tvSubMenu = itemView.findViewById(R.id.tvSubMenu);
         }
     }
 }

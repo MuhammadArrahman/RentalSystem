@@ -17,10 +17,18 @@ import java.util.List;
 public class ProfilUserAdapter
         extends RecyclerView.Adapter<ProfilUserAdapter.UserViewHolder> {
 
-    private final List<ProfilUserModel> list;
+    // ===== INTERFACE CLICK =====
+    public interface OnItemClickListener {
+        void onItemClick(ProfilUserModel item);
+    }
 
-    public ProfilUserAdapter(List<ProfilUserModel> list) {
+    private final List<ProfilUserModel> list;
+    private final OnItemClickListener listener;
+
+    // ===== CONSTRUCTOR =====
+    public ProfilUserAdapter(List<ProfilUserModel> list, OnItemClickListener listener) {
         this.list = list;
+        this.listener = listener;
     }
 
     @NonNull
@@ -36,7 +44,6 @@ public class ProfilUserAdapter
         ProfilUserModel data = list.get(position);
         if (data == null) return;
 
-        // ✅ TIDAK NPE — ID SUDAH COCOK
         holder.menuTitle.setText(data.getTitle());
         holder.menuIcon.setImageResource(data.getIconRes());
 
@@ -46,6 +53,9 @@ public class ProfilUserAdapter
         } else {
             holder.menuStatus.setVisibility(View.GONE);
         }
+
+        // ===== CLICK ITEM =====
+        holder.itemView.setOnClickListener(v -> listener.onItemClick(data));
     }
 
     @Override
@@ -53,7 +63,7 @@ public class ProfilUserAdapter
         return list != null ? list.size() : 0;
     }
 
-    // ================= VIEW HOLDER =================
+    // ===== VIEW HOLDER =====
     static class UserViewHolder extends RecyclerView.ViewHolder {
 
         TextView menuTitle, menuStatus;

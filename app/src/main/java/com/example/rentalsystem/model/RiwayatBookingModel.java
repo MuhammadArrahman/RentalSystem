@@ -1,4 +1,4 @@
-package com.example.rentalsystem.adapter;
+package com.example.rentalsystem.model;
 
 public class RiwayatBookingModel {
     private String kategori;

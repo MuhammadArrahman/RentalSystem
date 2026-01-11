@@ -60,7 +60,7 @@ public class DashboardActivity extends AppCompatActivity {
                     break;
 
                 case 3:
-                    loadFragment(new FragmentDetailPesan());
+                    loadFragment(new RiwayatBookingFragment());
                     break;
 
                 case 4:

@@ -1,15 +1,30 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+
+    <!-- Base application theme -->
     <style name="Base.Theme.RentalSystem" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <!-- Customize your theme here -->
     </style>
 
     <style name="Theme.RentalSystem" parent="Base.Theme.RentalSystem" />
+
+    <!-- ================= IMAGE STYLES ================= -->
+
     <style name="RoundedCornersImage">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">12dp</item>
     </style>
+
+    <style name="RoundedCornerImageLarge">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+    </style>
+
+    <style name="CircleImage">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <!-- ================= LABEL STYLES ================= -->
 
     <style name="LabelInput">
         <item name="android:layout_width">wrap_content</item>
@@ -21,6 +36,17 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="LabelStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#444444</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:layout_marginBottom">8dp</item>
+    </style>
+
+    <!-- ================= INPUT STYLES ================= -->
+
     <style name="EditTextInput">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">55dp</item>
@@ -28,6 +54,27 @@
         <item name="android:textColor">@android:color/black</item>
         <item name="android:textSize">14sp</item>
     </style>
+
+    <style name="InputStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">56dp</item>
+        <item name="android:background">@drawable/bg_input_field</item>
+        <item name="android:drawablePadding">12dp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="FieldStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/bg_input_field</item>
+        <item name="android:padding">16dp</item>
+        <item name="android:drawablePadding">12dp</item>
+        <item name="android:textColorHint">#000000</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <!-- ================= FILTER BUTTONS ================= -->
 
     <style name="FilterButtonActive">
         <item name="android:layout_width">wrap_content</item>
@@ -47,40 +94,4 @@
         <item name="android:textSize">13sp</item>
     </style>
 
-        <style name="CircleImage">
-            <item name="cornerSize">50%</item>
-        </style>
-
-
-        <style name="LabelStyle">
-            <item name="android:layout_width">match_parent</item>
-            <item name="android:layout_height">wrap_content</item>
-            <item name="android:textColor">#444444</item>
-            <item name="android:textSize">14sp</item>
-            <item name="android:layout_marginBottom">8dp</item>
-            <item name="android:layout_marginTop">16dp</item>
-        </style>
-
-        <style name="FieldStyle">
-            <item name="android:layout_width">match_parent</item>
-            <item name="android:layout_height">wrap_content</item>
-            <item name="android:background">@drawable/bg_input_field</item>
-            <item name="android:padding">16dp</item>
-            <item name="android:drawablePadding">12dp</item>
-            <item name="android:textColorHint">#000000</item>
-            <item name="android:textSize">16sp</item>
-        </style>
-
-        <style name="CirImage">
-            <item name="cornerSize">50%</item>
-        </style>
-
-    <style name="RoundedCornerImage">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">16dp</item>
-    </style>
-
 </resources>
-
-
-

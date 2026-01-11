@@ -8,56 +8,69 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import com.google.android.material.imageview.ShapeableImageView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class FragmentInformasiAkun extends Fragment {
 
-    private ImageView btnBack;
-    private ShapeableImageView imgProfile;
-    private FloatingActionButton btnFoto;
-    private EditText etNama, etEmail, etPhone, etTanggalLahir, etAlamat;
+    private ImageView btnBack, ivFotoProfil;
+    private EditText etNama, etEmail, etPhone, etAlamat;
     private Button btnSimpan;
 
+    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Ganti R.layout.fragment_informasi_akun dengan nama file XML Anda yang benar
+    public View onCreateView(
+            @NonNull LayoutInflater inflater,
+            @Nullable ViewGroup container,
+            @Nullable Bundle savedInstanceState) {
+
         return inflater.inflate(R.layout.fragment_informasi_akun, container, false);
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(
+            @NonNull View view,
+            @Nullable Bundle savedInstanceState) {
+
         super.onViewCreated(view, savedInstanceState);
 
-        // INISIALISASI - Harus sama persis dengan ID di XML
+        // 🔹 INISIALISASI VIEW
         btnBack = view.findViewById(R.id.btnBack);
-        imgProfile = view.findViewById(R.id.imgProfile);
-        btnFoto = view.findViewById(R.id.btnFoto);
+        ivFotoProfil = view.findViewById(R.id.ivFotoProfil);
+
         etNama = view.findViewById(R.id.etNama);
         etEmail = view.findViewById(R.id.etEmail);
         etPhone = view.findViewById(R.id.etPhone);
-        etTanggalLahir = view.findViewById(R.id.TanggalLahirEt);
-        etAlamat = view.findViewById(R.id.alamatEt);
+        etAlamat = view.findViewById(R.id.etAlamat);
+
         btnSimpan = view.findViewById(R.id.btnSimpan);
 
-        // Mencegah Crash: Cek jika ada view yang tidak ditemukan
-        if (etPhone == null || etAlamat == null || btnSimpan == null) {
-            Toast.makeText(getContext(), "Error: Ada ID yang salah di XML!", Toast.LENGTH_LONG).show();
-            return;
-        }
+        // 🔹 BACK
+        btnBack.setOnClickListener(v ->
+                requireActivity()
+                        .getSupportFragmentManager()
+                        .popBackStack()
+        );
 
-        btnBack.setOnClickListener(v -> getParentFragmentManager().popBackStack());
-
+        // 🔹 SIMPAN
         btnSimpan.setOnClickListener(v -> {
-            if (etNama.getText().toString().isEmpty()) {
+
+            if (etNama.getText().toString().trim().isEmpty()) {
                 etNama.setError("Nama tidak boleh kosong");
-            } else {
-                Toast.makeText(getContext(), "Data Berhasil Disimpan", Toast.LENGTH_SHORT).show();
-                getParentFragmentManager().popBackStack();
+                return;
             }
+
+            Toast.makeText(
+                    requireContext(),
+                    "Data berhasil disimpan",
+                    Toast.LENGTH_SHORT
+            ).show();
+
+            requireActivity()
+                    .getSupportFragmentManager()
+                    .popBackStack();
         });
     }
 }
