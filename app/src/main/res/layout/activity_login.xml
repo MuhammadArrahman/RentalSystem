@@ -68,6 +68,7 @@
         android:inputType="textEmailAddress"
         android:drawableStart="@drawable/ic_email"
         android:drawablePadding="12dp"
+        android:textColor="#000"
         app:layout_constraintTop_toBottomOf="@id/lblEmail" />
 
     <TextView
@@ -92,6 +93,7 @@
         android:drawableStart="@drawable/ic_lock"
         android:drawableEnd="@drawable/ic_eye_of"
         android:drawablePadding="12dp"
+        android:textColor="#000"
         app:layout_constraintTop_toBottomOf="@id/lblPassword" />
 
     <TextView

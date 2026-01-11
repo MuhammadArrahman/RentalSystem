@@ -1,6 +1,5 @@
 package com.example.rentalsystem;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,22 +56,14 @@ public class FragmentLupaPassword extends Fragment {
                     );
         });
 
-        // 2. Tombol back → Pindah ke LoginActivity (Bukan Fragment)
+        // 2. Tombol back → Memicu onBackPressed di LoginActivity
         btnBack.setOnClickListener(v -> {
-            // Buat Intent untuk membuka LoginActivity
-            Intent intent = new Intent(getActivity(), LoginActivity.class);
-
-            // Flag ini sangat penting agar tidak membuat tumpukan halaman baru (stack)
-            // FLAG_ACTIVITY_CLEAR_TOP akan menutup halaman Intro jika ada di background
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-
-            startActivity(intent);
-
-            // Tutup Activity saat ini agar tidak bisa di-back kembali ke halaman Lupa Password
             if (getActivity() != null) {
-                getActivity().finish();
-                // Berikan animasi perpindahan activity (opsional)
-                getActivity().overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+                // 1. Sembunyikan Container Fragment yang ada di LoginActivity
+                getActivity().findViewById(R.id.fragment_container).setVisibility(View.GONE);
+
+                // 2. Hapus fragment ini dari backstack
+                getActivity().getSupportFragmentManager().popBackStack();
             }
         });
 

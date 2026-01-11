@@ -58,6 +58,7 @@
         android:paddingHorizontal="16dp"
         android:layout_marginTop="8dp"
         android:inputType="textEmailAddress"
+        android:textColor="#000"
         android:drawableEnd="@drawable/ic_email"
         app:layout_constraintTop_toBottomOf="@id/lblEmail" />
 
@@ -80,6 +81,7 @@
         android:paddingHorizontal="16dp"
         android:layout_marginTop="8dp"
         android:inputType="phone"
+        android:textColor="#000"
         app:layout_constraintTop_toBottomOf="@id/lblPhone" />
 
     <TextView
@@ -101,6 +103,7 @@
         android:paddingHorizontal="16dp"
         android:layout_marginTop="8dp"
         android:inputType="textPassword"
+        android:textColor="#000"
         android:drawableEnd="@drawable/ic_eye"
         app:layout_constraintTop_toBottomOf="@id/lblPassword" />
 

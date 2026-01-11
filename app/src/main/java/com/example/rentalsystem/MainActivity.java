@@ -1,12 +1,13 @@
 package com.example.rentalsystem;
 
 import android.os.Bundle;
-
+import android.view.View;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,47 +19,68 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    private BottomMenuAdapter menuAdapter;
+    private List<MenuModel> menuList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
-        // Konfigurasi Window Insets agar tidak tertutup Status Bar / Navigation Bar
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+        View mainView = findViewById(R.id.main);
+        if (mainView != null) {
+            ViewCompat.setOnApplyWindowInsetsListener(mainView, (v, insets) -> {
+                Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+                v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+                return insets;
+            });
+        }
 
-        // 1️⃣ Setup Bottom Menu RecyclerView
         setupBottomMenu();
 
-        // 2️⃣ LOAD FRAGMENT PERTAMA KALI (ARMADA)
+        // Munculkan Dashboard pertama kali
         if (savedInstanceState == null) {
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fragment_container, new ArmadaFragment())
-                    .commit();
+            loadFragment(new FragmentDashboard());
         }
     }
 
     private void setupBottomMenu() {
         RecyclerView rvMenu = findViewById(R.id.rvBottomMenu);
-
-        // Grid 5 kolom (sesuai jumlah menu)
         rvMenu.setLayoutManager(new GridLayoutManager(this, 5));
 
-        // Data Menu Bottom
-        List<MenuModel> menus = new ArrayList<>();
-        menus.add(new MenuModel("Dashboard", R.drawable.ic_dashboard, false));
-        menus.add(new MenuModel("Verifikasi", R.drawable.ic_verify, false));
-        menus.add(new MenuModel("Armada", R.drawable.ic_armada, true)); // aktif default
-        menus.add(new MenuModel("Pesanan", R.drawable.ic_order, false));
-        menus.add(new MenuModel("Profil", R.drawable.ic_profile, false));
+        menuList = new ArrayList<>();
+        menuList.add(new MenuModel("Dashboard", R.drawable.ic_dashboard, true));
+        menuList.add(new MenuModel("Verifikasi", R.drawable.ic_verify, false));
+        menuList.add(new MenuModel("Armada", R.drawable.ic_armada, false));
+        menuList.add(new MenuModel("Pesanan", R.drawable.ic_order, false));
+        menuList.add(new MenuModel("Profil", R.drawable.ic_profile, false));
 
-        BottomMenuAdapter adapter = new BottomMenuAdapter(menus);
-        rvMenu.setAdapter(adapter);
+        // Inisialisasi Adapter dengan Listener Klik
+        menuAdapter = new BottomMenuAdapter(menuList, position -> {
+            // Update UI Item yang aktif
+            for (int i = 0; i < menuList.size(); i++) {
+                menuList.get(i).setActive(i == position);
+            }
+            menuAdapter.notifyDataSetChanged();
+
+            // Logika pindah fragment
+            switch (position) {
+                case 0: loadFragment(new FragmentDashboard()); break;
+                case 1: /* loadFragment(new FragmentVerifikasi()); */ break;
+                case 2: /* loadFragment(new FragmentArmada()); */ break;
+                case 3: /* loadFragment(new FragmentPesanan()); */ break;
+                case 4: /* loadFragment(new FragmentProfil()); */ break;
+            }
+        });
+
+        rvMenu.setAdapter(menuAdapter);
+    }
+
+    private void loadFragment(Fragment fragment) {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .commit();
     }
 }
