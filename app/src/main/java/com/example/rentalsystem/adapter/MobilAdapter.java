@@ -17,9 +17,17 @@ import java.util.List;
 public class MobilAdapter extends RecyclerView.Adapter<MobilAdapter.ViewHolder> {
 
     private List<MobilModel> mobilList;
+    private OnItemClickListener listener;
 
-    public MobilAdapter(List<MobilModel> mobilList) {
+    // 🔥 INTERFACE CLICK
+    public interface OnItemClickListener {
+        void onItemClick(MobilModel mobil);
+    }
+
+    // 🔥 CONSTRUCTOR
+    public MobilAdapter(List<MobilModel> mobilList, OnItemClickListener listener) {
         this.mobilList = mobilList;
+        this.listener = listener;
     }
 
     @NonNull
@@ -41,24 +49,26 @@ public class MobilAdapter extends RecyclerView.Adapter<MobilAdapter.ViewHolder> 
         holder.tvStatus.setText(mobil.getStatus());
 
         // 🎨 WARNA STATUS
-        String status = mobil.getStatus().toLowerCase();
-
-        switch (status) {
+        switch (mobil.getStatus().toLowerCase()) {
             case "tersedia":
                 holder.tvStatus.setTextColor(Color.parseColor("#12B76A")); // hijau
                 break;
-
             case "disewa":
                 holder.tvStatus.setTextColor(Color.parseColor("#F79009")); // oranye
                 break;
-
             case "servis":
                 holder.tvStatus.setTextColor(Color.parseColor("#D92D20")); // merah
                 break;
-
             default:
                 holder.tvStatus.setTextColor(Color.GRAY);
         }
+
+        // 👉 CLICK ITEM
+        holder.itemView.setOnClickListener(v -> {
+            if (listener != null) {
+                listener.onItemClick(mobil);
+            }
+        });
     }
 
     @Override

@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.rentalsystem.adapter.MobilAdapter;
 import com.example.rentalsystem.model.MobilModel;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,7 @@ import java.util.List;
 public class ArmadaFragment extends Fragment {
 
     private RecyclerView rvArmada;
+    private FloatingActionButton btnTambahMobil;
 
     @Nullable
     @Override
@@ -28,14 +30,16 @@ public class ArmadaFragment extends Fragment {
             @Nullable ViewGroup container,
             @Nullable Bundle savedInstanceState) {
 
-        // ✅ INFLATE LAYOUT ARMADA (BENAR)
         View view = inflater.inflate(R.layout.fragment_armada, container, false);
 
-        // ✅ ID SESUAI XML
+        // RecyclerView
         rvArmada = view.findViewById(R.id.rvArmada);
         rvArmada.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        // Data Armada
+        // Floating Button
+        btnTambahMobil = view.findViewById(R.id.btnTambahMobil);
+
+        // Data Dummy Armada
         List<MobilModel> listMobil = new ArrayList<>();
         listMobil.add(new MobilModel(
                 "TOYOTA", "Avanza Veloz", "B 1293 KJH",
@@ -45,14 +49,28 @@ public class ArmadaFragment extends Fragment {
                 "HONDA", "Brio Satya", "B 5678 TUI",
                 "Rp 300rb", "Disewa", R.drawable.ic_armada
         ));
-        listMobil.add(new MobilModel(
-                "MITSUBISHI", "Xpander", "D 9901 AB",
-                "Rp 500rb", "Servis", R.drawable.ic_armada
-        ));
 
-        // Pasang Adapter
-        MobilAdapter adapter = new MobilAdapter(listMobil);
+        // 🔥 Adapter + Click Item → Detail Mobil
+        MobilAdapter adapter = new MobilAdapter(listMobil, mobil -> {
+            requireActivity()
+                    .getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, new DetailMobilFragment())
+                    .addToBackStack(null)
+                    .commit();
+        });
+
         rvArmada.setAdapter(adapter);
+
+        // 🔥 CLICK TAMBAH MOBIL → TambahMobilFragment
+        btnTambahMobil.setOnClickListener(v -> {
+            requireActivity()
+                    .getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, new TambahMobilFragment())
+                    .addToBackStack(null)
+                    .commit();
+        });
 
         return view;
     }
