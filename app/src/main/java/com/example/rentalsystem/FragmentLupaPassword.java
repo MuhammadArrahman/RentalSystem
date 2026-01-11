@@ -59,18 +59,20 @@ public class FragmentLupaPassword extends Fragment {
 
         // 2. Tombol back → Pindah ke LoginActivity (Bukan Fragment)
         btnBack.setOnClickListener(v -> {
-            // Menggunakan Intent untuk pindah ke Activity
+            // Buat Intent untuk membuka LoginActivity
             Intent intent = new Intent(getActivity(), LoginActivity.class);
 
-            // Flag ini memastikan jika user menekan back di LoginActivity,
-            // mereka tidak akan kembali lagi ke halaman Lupa Password.
+            // Flag ini sangat penting agar tidak membuat tumpukan halaman baru (stack)
+            // FLAG_ACTIVITY_CLEAR_TOP akan menutup halaman Intro jika ada di background
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
 
             startActivity(intent);
 
-            // Menutup activity saat ini yang menampung fragment lupa password
+            // Tutup Activity saat ini agar tidak bisa di-back kembali ke halaman Lupa Password
             if (getActivity() != null) {
                 getActivity().finish();
+                // Berikan animasi perpindahan activity (opsional)
+                getActivity().overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
             }
         });
 

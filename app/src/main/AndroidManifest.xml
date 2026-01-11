@@ -35,7 +35,7 @@
         <!-- AUTH -->
         <activity
             android:name=".LoginActivity"
-            android:exported="false" />
+            android:exported="true" />
 
         <activity
             android:name=".RegisterActivity"
