@@ -1,26 +1,26 @@
 package com.example.rentalsystem.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.rentalsystem.R;
-import com.example.rentalsystem.VerikasiDetailActivity;
 import com.example.rentalsystem.model.VerifikasiModel;
-import com.google.android.material.imageview.ShapeableImageView;
 
 import java.util.List;
 
-public class VerifikasiAdapter extends RecyclerView.Adapter<VerifikasiAdapter.ViewHolder> {
+public class VerifikasiAdapter
+        extends RecyclerView.Adapter<VerifikasiAdapter.ViewHolder> {
 
-    private final List<VerifikasiModel> list;
     private final Context context;
+    private final List<VerifikasiModel> list;
 
     public VerifikasiAdapter(Context context, List<VerifikasiModel> list) {
         this.context = context;
@@ -29,30 +29,35 @@ public class VerifikasiAdapter extends RecyclerView.Adapter<VerifikasiAdapter.Vi
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_verifikasi, parent, false);
-        return new ViewHolder(v);
+    public ViewHolder onCreateViewHolder(
+            @NonNull ViewGroup parent, int viewType) {
+
+        View view = LayoutInflater.from(context)
+                .inflate(R.layout.item_verifikasi_ktp, parent, false);
+
+        return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        VerifikasiModel item = list.get(position);
+    public void onBindViewHolder(
+            @NonNull ViewHolder holder, int position) {
 
-        holder.tvNama.setText(item.getNama());
-        holder.tvNik.setText("NIK: " + item.getNik());
-        holder.tvWaktu.setText(item.getWaktu());
-        holder.ivKtp.setImageResource(item.getFotoKtp());
+        VerifikasiModel model = list.get(position);
 
-        // ✅ PINDAH KE HALAMAN DETAIL
-        holder.itemView.setOnClickListener(v -> {
-            Intent intent = new Intent(context, VerikasiDetailActivity.class);
-            intent.putExtra("nama", item.getNama());
-            intent.putExtra("nik", item.getNik());
-            intent.putExtra("tgl_lahir", item.getTglLahir());
-            intent.putExtra("status", item.getStatusKawin());
-            intent.putExtra("foto", item.getFotoKtp());
-            context.startActivity(intent);
+        holder.tvNamaUser.setText(model.getNama());
+        holder.tvNikUser.setText("NIK: " + model.getNik());
+        holder.tvWaktu.setText(model.getWaktu());
+        holder.tvTglLahir.setText(model.getTglLahir());
+        holder.tvStatusKawin.setText(model.getStatusKawin());
+        holder.ivKtp.setImageResource(model.getFotoKtp());
+
+        // OPTIONAL CLICK
+        holder.btnSetujui.setOnClickListener(v -> {
+            // TODO: logic setujui
+        });
+
+        holder.btnTolak.setOnClickListener(v -> {
+            // TODO: logic tolak
         });
     }
 
@@ -62,15 +67,26 @@ public class VerifikasiAdapter extends RecyclerView.Adapter<VerifikasiAdapter.Vi
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvNama, tvNik, tvWaktu;
-        ShapeableImageView ivKtp;
+
+        ImageView ivUser, ivKtp;
+        TextView tvNamaUser, tvNikUser, tvWaktu,
+                tvTglLahir, tvStatusKawin;
+        Button btnTolak, btnSetujui;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvNama = itemView.findViewById(R.id.tvNamaUser);
-            tvNik = itemView.findViewById(R.id.tvNikUser);
-            tvWaktu = itemView.findViewById(R.id.tvWaktu);
-            ivKtp = itemView.findViewById(R.id.ivKtp);
+
+            ivUser        = itemView.findViewById(R.id.ivUser);
+            ivKtp         = itemView.findViewById(R.id.ivKtp);
+
+            tvNamaUser    = itemView.findViewById(R.id.tvNamaUser);
+            tvNikUser     = itemView.findViewById(R.id.tvNikUser);
+            tvWaktu       = itemView.findViewById(R.id.tvWaktu);
+            tvTglLahir    = itemView.findViewById(R.id.tvTglLahir);
+            tvStatusKawin = itemView.findViewById(R.id.tvStatusKawin);
+
+            btnTolak      = itemView.findViewById(R.id.btnTolak);
+            btnSetujui    = itemView.findViewById(R.id.btnSetujui);
         }
     }
 }

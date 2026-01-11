@@ -36,15 +36,19 @@ public class VerifikasiFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_verifikasi, container, false);
 
-        // Default status
         String status = "Menunggu";
         if (getArguments() != null) {
             status = getArguments().getString("STATUS_KEY", "Menunggu");
         }
 
         RecyclerView rv = view.findViewById(R.id.rvVerifikasiList);
-        rv.setLayoutManager(new LinearLayoutManager(getContext()));
-        rv.setAdapter(new VerifikasiAdapter(generateData(status)));
+        rv.setLayoutManager(new LinearLayoutManager(requireContext()));
+
+        // ✅ FIXED DI SINI
+        VerifikasiAdapter adapter =
+                new VerifikasiAdapter(requireContext(), generateData(status));
+
+        rv.setAdapter(adapter);
 
         return view;
     }
