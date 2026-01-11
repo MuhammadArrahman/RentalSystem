@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.view.MotionEvent;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -31,8 +32,10 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        // Firebase
         mAuth = FirebaseAuth.getInstance();
 
+        // View binding
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
         btnLogin = findViewById(R.id.btnLogin);
@@ -47,29 +50,39 @@ public class LoginActivity extends AppCompatActivity {
         tvRegisterLink.setOnClickListener(v ->
                 startActivity(new Intent(this, RegisterActivity.class)));
 
-        // 🔥 PINDAH KE FRAGMENT LUPA PASSWORD
+        // 🔥 BUKA FRAGMENT LUPA PASSWORD
         tvForgotPassword.setOnClickListener(v -> openForgotPasswordFragment());
 
         btnBack.setOnClickListener(v -> finish());
     }
 
+    // ================= FRAGMENT HANDLER =================
     private void openForgotPasswordFragment() {
+
+        // 🔥 TAMPILKAN CONTAINER
+        findViewById(R.id.fragment_container).setVisibility(View.VISIBLE);
+
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragment_container, new FragmentLupaPassword())
-                .addToBackStack(null)
+                .addToBackStack("forgot_password")
                 .commit();
     }
 
     @Override
     public void onBackPressed() {
         if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+
+            // 🔥 KEMBALI KE LOGIN
             getSupportFragmentManager().popBackStack();
+            findViewById(R.id.fragment_container).setVisibility(View.GONE);
+
         } else {
             super.onBackPressed();
         }
     }
 
+    // ================= LOGIN =================
     private void loginUser() {
         String email = etEmail.getText().toString().trim();
         String password = etPassword.getText().toString().trim();
@@ -109,6 +122,7 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
+    // ================= PASSWORD TOGGLE =================
     private void setupPasswordToggle() {
         etPassword.setOnTouchListener((v, event) -> {
             if (event.getAction() == MotionEvent.ACTION_UP &&

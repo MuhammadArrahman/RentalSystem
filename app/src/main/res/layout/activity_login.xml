@@ -141,11 +141,13 @@
             android:textStyle="bold" />
     </LinearLayout>
 
-    <!-- 🔥 CONTAINER FRAGMENT (PALING ATAS / OVERLAY) -->
+    <!-- ================= FRAGMENT CONTAINER ================= -->
+    <!-- 🔥 WAJIB ADA (OVERLAY FULL SCREEN) -->
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@color/white"
         android:clickable="true"
         android:focusable="true"
         android:visibility="gone"

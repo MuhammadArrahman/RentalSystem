@@ -1,7 +1,6 @@
 package com.example.rentalsystem;
 
 import android.os.Bundle;
-import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,61 +17,63 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class FragmentLupaPassword extends Fragment {
 
-    private EditText etEmail;
-    private Button btnKirim;
-    private ImageView btnBack;
+    private FirebaseAuth mAuth;
 
+    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_lupa_password, container, false);
-    }
+    public View onCreateView(
+            @NonNull LayoutInflater inflater,
+            @Nullable ViewGroup container,
+            @Nullable Bundle savedInstanceState) {
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        btnBack = view.findViewById(R.id.btnBack);
-        etEmail = view.findViewById(R.id.etEmailForgot);
-        btnKirim = view.findViewById(R.id.btnKirimKode);
-
-        btnBack.setOnClickListener(v ->
-                getParentFragmentManager().popBackStack()
+        View view = inflater.inflate(
+                R.layout.fragment_lupa_password,
+                container,
+                false
         );
 
-        btnKirim.setOnClickListener(v -> sendResetEmail());
-    }
+        // Firebase
+        mAuth = FirebaseAuth.getInstance();
 
-    private void sendResetEmail() {
-        String email = etEmail.getText().toString().trim();
+        // View
+        EditText etEmail = view.findViewById(R.id.etEmailForgot);
+        Button btnSend = view.findViewById(R.id.btnSend);
+        ImageView btnBack = view.findViewById(R.id.btnBack);
 
-        if (email.isEmpty()) {
-            etEmail.setError("Email tidak boleh kosong");
-            return;
-        }
+        // Kirim reset password
+        btnSend.setOnClickListener(v -> {
+            String email = etEmail.getText().toString().trim();
 
-        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            etEmail.setError("Format email tidak valid");
-            return;
-        }
+            if (email.isEmpty()) {
+                etEmail.setError("Email wajib diisi");
+                etEmail.requestFocus();
+                return;
+            }
 
-        btnKirim.setEnabled(false);
-        btnKirim.setText("Mengirim...");
+            mAuth.sendPasswordResetEmail(email)
+                    .addOnSuccessListener(unused ->
+                            Toast.makeText(
+                                    getContext(),
+                                    "Email reset password berhasil dikirim",
+                                    Toast.LENGTH_LONG
+                            ).show()
+                    )
+                    .addOnFailureListener(e ->
+                            Toast.makeText(
+                                    getContext(),
+                                    e.getMessage(),
+                                    Toast.LENGTH_LONG
+                            ).show()
+                    );
+        });
 
-        FirebaseAuth.getInstance()
-                .sendPasswordResetEmail(email)
-                .addOnSuccessListener(unused -> {
-                    Toast.makeText(getContext(),
-                            "Link reset password dikirim ke email",
-                            Toast.LENGTH_LONG).show();
-                    getParentFragmentManager().popBackStack();
-                })
-                .addOnFailureListener(e -> {
-                    btnKirim.setEnabled(true);
-                    btnKirim.setText("Kirim Kode Verifikasi  ➤");
-                    Toast.makeText(getContext(),
-                            "Gagal: " + e.getMessage(),
-                            Toast.LENGTH_LONG).show();
-                });
+        // Back ke Login
+        btnBack.setOnClickListener(v ->
+                requireActivity()
+                        .getSupportFragmentManager()
+                        .popBackStack()
+        );
+
+        return view;
     }
 }
