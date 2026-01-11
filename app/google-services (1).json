@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1057408711755",
+    "project_id": "rentalsystemapp-32c41",
+    "storage_bucket": "rentalsystemapp-32c41.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1057408711755:android:73008e78e556b4656161ce",
+        "android_client_info": {
+          "package_name": "com.example.rentalsystem"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCL5RBs5XiqujGH9VLJ79u9P1_tfOt5ouI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

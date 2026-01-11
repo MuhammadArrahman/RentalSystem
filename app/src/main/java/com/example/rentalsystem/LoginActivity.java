@@ -33,7 +33,6 @@ public class LoginActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        // Init View
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
         btnLogin = findViewById(R.id.btnLogin);
@@ -43,21 +42,34 @@ public class LoginActivity extends AppCompatActivity {
 
         setupPasswordToggle();
 
-        // Login
         btnLogin.setOnClickListener(v -> loginUser());
 
-        // Pindah ke Register
         tvRegisterLink.setOnClickListener(v ->
                 startActivity(new Intent(this, RegisterActivity.class)));
 
-        // Forgot Password
-        tvForgotPassword.setOnClickListener(v -> resetPassword());
+        // 🔥 PINDAH KE FRAGMENT LUPA PASSWORD
+        tvForgotPassword.setOnClickListener(v -> openForgotPasswordFragment());
 
-        // Back
         btnBack.setOnClickListener(v -> finish());
     }
 
-    // ================= LOGIN =================
+    private void openForgotPasswordFragment() {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, new FragmentLupaPassword())
+                .addToBackStack(null)
+                .commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+            getSupportFragmentManager().popBackStack();
+        } else {
+            super.onBackPressed();
+        }
+    }
+
     private void loginUser() {
         String email = etEmail.getText().toString().trim();
         String password = etPassword.getText().toString().trim();
@@ -86,10 +98,6 @@ public class LoginActivity extends AppCompatActivity {
                             return;
                         }
 
-                        Toast.makeText(this,
-                                "Login berhasil",
-                                Toast.LENGTH_SHORT).show();
-
                         startActivity(new Intent(this, MainActivity.class));
                         finish();
 
@@ -101,39 +109,15 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
-    // ================= RESET PASSWORD =================
-    private void resetPassword() {
-        String email = etEmail.getText().toString().trim();
-
-        if (TextUtils.isEmpty(email)) {
-            etEmail.setError("Masukkan email terlebih dahulu");
-            return;
-        }
-
-        mAuth.sendPasswordResetEmail(email)
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        Toast.makeText(this,
-                                "Link reset password telah dikirim ke email",
-                                Toast.LENGTH_LONG).show();
-                    } else {
-                        Toast.makeText(this,
-                                "Gagal mengirim email reset",
-                                Toast.LENGTH_SHORT).show();
-                    }
-                });
-    }
-
-    // ================= TOGGLE PASSWORD =================
     private void setupPasswordToggle() {
         etPassword.setOnTouchListener((v, event) -> {
-            final int DRAWABLE_RIGHT = 2;
+            if (event.getAction() == MotionEvent.ACTION_UP &&
+                    etPassword.getCompoundDrawables()[2] != null) {
 
-            if (event.getAction() == MotionEvent.ACTION_UP) {
-                if (event.getRawX() >=
-                        (etPassword.getRight()
-                                - etPassword.getCompoundDrawables()[DRAWABLE_RIGHT]
-                                .getBounds().width())) {
+                int drawableWidth =
+                        etPassword.getCompoundDrawables()[2].getBounds().width();
+
+                if (event.getRawX() >= (etPassword.getRight() - drawableWidth)) {
                     togglePassword();
                     return true;
                 }
