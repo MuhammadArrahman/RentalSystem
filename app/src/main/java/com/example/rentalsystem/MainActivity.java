@@ -21,22 +21,24 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
-        // Konfigurasi Window Insets agar tidak tertutup Status Bar/Nav Bar
+        // Konfigurasi Window Insets agar tidak tertutup Status Bar / Navigation Bar
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
-        // 1. Inisialisasi RecyclerView Menu Bawah
+        // 1️⃣ Setup Bottom Menu RecyclerView
         setupBottomMenu();
 
-        // 2. Load Fragment default pertama kali (Misal: Armada)
+        // 2️⃣ LOAD FRAGMENT PERTAMA KALI (ARMADA)
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
+            getSupportFragmentManager()
+                    .beginTransaction()
                     .replace(R.id.fragment_container, new ArmadaFragment())
                     .commit();
         }
@@ -45,18 +47,17 @@ public class MainActivity extends AppCompatActivity {
     private void setupBottomMenu() {
         RecyclerView rvMenu = findViewById(R.id.rvBottomMenu);
 
-        // Gunakan GridLayoutManager dengan 5 kolom agar pas dengan 5 menu
+        // Grid 5 kolom (sesuai jumlah menu)
         rvMenu.setLayoutManager(new GridLayoutManager(this, 5));
 
-        // Menyiapkan data menu
+        // Data Menu Bottom
         List<MenuModel> menus = new ArrayList<>();
         menus.add(new MenuModel("Dashboard", R.drawable.ic_dashboard, false));
         menus.add(new MenuModel("Verifikasi", R.drawable.ic_verify, false));
-        menus.add(new MenuModel("Armada", R.drawable.ic_armada, true)); // Set true untuk menu aktif pertama
+        menus.add(new MenuModel("Armada", R.drawable.ic_armada, true)); // aktif default
         menus.add(new MenuModel("Pesanan", R.drawable.ic_order, false));
         menus.add(new MenuModel("Profil", R.drawable.ic_profile, false));
 
-        // Set Adapter
         BottomMenuAdapter adapter = new BottomMenuAdapter(menus);
         rvMenu.setAdapter(adapter);
     }

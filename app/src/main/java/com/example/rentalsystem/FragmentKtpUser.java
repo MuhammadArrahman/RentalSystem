@@ -35,6 +35,7 @@ public class FragmentKtpUser extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // Inflate layout fragment_ktp_user
         return inflater.inflate(R.layout.fragment_ktp_user, container, false);
     }
 
@@ -42,11 +43,11 @@ public class FragmentKtpUser extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // 1. Inisialisasi View
+        // 1. Inisialisasi View berdasarkan ID di XML
         btnBack = view.findViewById(R.id.btnBack);
-        btnUploadKtp = view.findViewById(R.id.btnTolak);
-        btnUploadSelfie = view.findViewById(R.id.btnLoadMore);
-        btnKirim = view.findViewById(R.id.rvNotifikasi);
+        btnUploadKtp = view.findViewById(R.id.btnUploadKtp); // Sesuai XML
+        btnUploadSelfie = view.findViewById(R.id.btnUploadSelfie); // Sesuai XML
+        btnKirim = view.findViewById(R.id.btnKirimVerifikasi); // Sesuai XML
 
         // 2. Register Activity Result untuk Galeri
         ActivityResultLauncher<Intent> galleryLauncher = registerForActivityResult(
@@ -57,7 +58,6 @@ public class FragmentKtpUser extends Fragment {
                         if (isKtpSelected) {
                             uriKtp = imageUri;
                             Toast.makeText(getContext(), "Foto KTP Berhasil Dipilih", Toast.LENGTH_SHORT).show();
-                            // Anda bisa mengganti icon kamera dengan thumbnail gambar di sini
                         } else {
                             uriSelfie = imageUri;
                             Toast.makeText(getContext(), "Foto Selfie Berhasil Dipilih", Toast.LENGTH_SHORT).show();
@@ -99,14 +99,16 @@ public class FragmentKtpUser extends Fragment {
             return;
         }
 
-        // Tampilkan loading atau proses kirim ke server
+        // Tampilkan loading
         btnKirim.setEnabled(false);
         btnKirim.setText("Mengirim...");
 
         // Simulasi pengiriman data
-        view.postDelayed(() -> {
-            Toast.makeText(getContext(), "Data Verifikasi Berhasil Dikirim!", Toast.LENGTH_LONG).show();
-            getParentFragmentManager().popBackStack();
+        btnKirim.postDelayed(() -> {
+            if (isAdded()) { // Cek apakah fragment masih menempel
+                Toast.makeText(getContext(), "Data Verifikasi Berhasil Dikirim!", Toast.LENGTH_LONG).show();
+                getParentFragmentManager().popBackStack();
+            }
         }, 2000);
     }
 }

@@ -19,7 +19,7 @@
             android:layout_width="110dp"
             android:layout_height="80dp"
             android:scaleType="centerInside"
-            android:src="@drawable/Porsche" />
+            android:src="@drawable/por" />
 
         <LinearLayout
             android:layout_width="0dp"

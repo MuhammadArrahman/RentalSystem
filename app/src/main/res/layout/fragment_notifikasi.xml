@@ -30,6 +30,7 @@
             android:textStyle="bold" />
 
         <ImageView
+            android:id="@+id/btnMarkAllRead"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_alignParentEnd="true"
@@ -52,31 +53,43 @@
             android:paddingHorizontal="16dp">
 
             <Button
+                android:id="@+id/btnSemua"
                 style="@style/FilterButtonActive"
-                android:text="Semua"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:minHeight="48dp"
-                android:minWidth="48dp"/>
+                android:minWidth="48dp"
+                android:text="Semua" />
 
             <Button
+                android:id="@+id/btnBooking"
                 style="@style/FilterButtonInactive"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="Booking"
                 android:minHeight="48dp"
-                android:minWidth="48dp"/>
+                android:minWidth="48dp"
+                android:text="Booking" />
 
             <Button
+                android:id="@+id/btnVerifikasi"
                 style="@style/FilterButtonInactive"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="Verifikasi"
                 android:minHeight="48dp"
-                android:minWidth="48dp"/>
+                android:minWidth="48dp"
+                android:text="Verifikasi" />
 
             <Button
+                android:id="@+id/btnSistem"
                 style="@style/FilterButtonInactive"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="Sistem"
                 android:minHeight="48dp"
-                android:minWidth="48dp"/>
+                android:minWidth="48dp"
+                android:text="Sistem" />
         </LinearLayout>
     </HorizontalScrollView>
 

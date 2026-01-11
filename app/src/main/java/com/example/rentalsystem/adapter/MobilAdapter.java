@@ -5,10 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.rentalsystem.R;
 import com.example.rentalsystem.model.MobilModel;
+
 import java.util.List;
 
 public class MobilAdapter extends RecyclerView.Adapter<MobilAdapter.ViewHolder> {
@@ -22,7 +25,8 @@ public class MobilAdapter extends RecyclerView.Adapter<MobilAdapter.ViewHolder> 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_mobil, parent, false);
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_mobil, parent, false);
         return new ViewHolder(view);
     }
 
@@ -36,17 +40,11 @@ public class MobilAdapter extends RecyclerView.Adapter<MobilAdapter.ViewHolder> 
         holder.tvHarga.setText(mobil.getHarga());
         holder.tvStatus.setText(mobil.getStatus());
 
-        // Logika perubahan warna Badge Status berdasarkan data
-        String status = mobil.getStatus().toLowerCase();
-        if (status.equals("tersedia")) {
-            holder.tvStatus.setBackgroundResource(R.drawable.bg_status_tersedia);
-            holder.tvStatus.setTextColor(Color.parseColor("#12B76A")); // Hijau
-        } else if (status.equals("disewa")) {
-            holder.tvStatus.setBackgroundResource(R.drawable.bg_status_disewa);
-            holder.tvStatus.setTextColor(Color.parseColor("#175CD3")); // Biru
-        } else if (status.equals("servis")) {
-            holder.tvStatus.setBackgroundResource(R.drawable.bg_status_servis);
-            holder.tvStatus.setTextColor(Color.parseColor("#B54708")); // Orange
+        // Warna status
+        if (mobil.getStatus().equalsIgnoreCase("tersedia")) {
+            holder.tvStatus.setTextColor(Color.parseColor("#12B76A")); // hijau
+        } else {
+            holder.tvStatus.setTextColor(Color.parseColor("#B54708")); // coklat
         }
     }
 
@@ -56,13 +54,15 @@ public class MobilAdapter extends RecyclerView.Adapter<MobilAdapter.ViewHolder> 
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
+
         TextView tvMerk, tvTipe, tvPlat, tvHarga, tvStatus;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvMerk = itemView.findViewById(R.id.tvMerk);
-            tvTipe = itemView.findViewById(R.id.tvTipe);
-            tvPlat = itemView.findViewById(R.id.tvPlat);
-            tvHarga = itemView.findViewById(R.id.tvHarga);
+            tvMerk   = itemView.findViewById(R.id.tvMerk);
+            tvTipe   = itemView.findViewById(R.id.tvTipe);
+            tvPlat   = itemView.findViewById(R.id.tvPlat);
+            tvHarga  = itemView.findViewById(R.id.tvHarga);
             tvStatus = itemView.findViewById(R.id.tvStatus);
         }
     }

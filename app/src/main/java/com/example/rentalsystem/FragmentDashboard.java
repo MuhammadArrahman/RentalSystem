@@ -31,10 +31,10 @@ public class FragmentDashboard extends Fragment {
         rvDashboard.setLayoutManager(new LinearLayoutManager(getContext()));
 
         listMobil = new ArrayList<>();
-        listMobil.add(new DashboardModel("Honda Civic RS", "Automatic", "5 Kursi", "Rp 450rb", R.drawable.Porsche));
-        listMobil.add(new DashboardModel("Tesla Model 3", "Automatic", "Electric", "Rp 1.2jt", R.drawable.Porsche));
-        listMobil.add(new DashboardModel("Toyota Rush", "Manual", "7 Kursi", "Rp 350rb", R.drawable.Porsche));
-        listMobil.add(new DashboardModel("Mitsubishi Pajero", "Automatic", "Diesel", "Rp 650rb", R.drawable.Porsche));
+        listMobil.add(new DashboardModel("Honda Civic RS", "Automatic", "5 Kursi", "Rp 450rb", R.drawable.por));
+        listMobil.add(new DashboardModel("Tesla Model 3", "Automatic", "Electric", "Rp 1.2jt", R.drawable.por));
+        listMobil.add(new DashboardModel("Toyota Rush", "Manual", "7 Kursi", "Rp 350rb", R.drawable.por));
+        listMobil.add(new DashboardModel("Mitsubishi Pajero", "Automatic", "Diesel", "Rp 650rb", R.drawable.por));
 
         adapter = new DashboardAdapter(listMobil);
         rvDashboard.setAdapter(adapter);
