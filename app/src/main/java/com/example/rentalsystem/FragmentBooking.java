@@ -12,8 +12,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.rentalsystem.R;
-import java.util.ArrayList;
 
 public class FragmentBooking extends Fragment {
 
@@ -23,7 +21,8 @@ public class FragmentBooking extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.item_booking, container, false);
+        // FIX: Gunakan layout fragment_booking yang baru
+        View view = inflater.inflate(R.layout.booking_item, container, false);
 
         // Inisialisasi View
         tabPending = view.findViewById(R.id.tabPending);
@@ -33,7 +32,6 @@ public class FragmentBooking extends Fragment {
 
         // Setup RecyclerView
         rvBooking.setLayoutManager(new LinearLayoutManager(getContext()));
-        // Setup Adapter Anda di sini...
 
         // Logika Klik Tab
         tabPending.setOnClickListener(v -> switchTab(tabPending));
@@ -44,18 +42,15 @@ public class FragmentBooking extends Fragment {
     }
 
     private void switchTab(TextView selectedTab) {
-        // Reset semua tab ke gaya default (tidak aktif)
         resetTabStyles(tabPending);
         resetTabStyles(tabBerjalan);
         resetTabStyles(tabSelesai);
 
-        // Set tab yang diklik menjadi aktif
         selectedTab.setBackgroundResource(R.drawable.bg_tab_active);
         selectedTab.setTextColor(Color.parseColor("#175CD3"));
         selectedTab.setTypeface(null, Typeface.BOLD);
 
-        // Contoh: Panggil data berbeda berdasarkan tab
-        // updateListData(selectedTab.getText().toString());
+        // Di sini Anda bisa memanggil data dari API/Database berdasarkan status
     }
 
     private void resetTabStyles(TextView textView) {

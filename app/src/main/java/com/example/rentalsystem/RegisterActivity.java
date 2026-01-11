@@ -16,6 +16,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -26,6 +31,8 @@ public class RegisterActivity extends AppCompatActivity {
     private CheckBox cbTerms;
 
     private FirebaseAuth mAuth;
+    private DatabaseReference userRef;
+
     private boolean isPasswordVisible = false;
 
     @Override
@@ -33,7 +40,9 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        // 🔥 Firebase
         mAuth = FirebaseAuth.getInstance();
+        userRef = FirebaseDatabase.getInstance().getReference("users");
 
         etEmail = findViewById(R.id.etEmail);
         etPhone = findViewById(R.id.etPhone);
@@ -53,7 +62,7 @@ public class RegisterActivity extends AppCompatActivity {
         btnBack.setOnClickListener(v -> finish());
     }
 
-    // ================= REGISTER + EMAIL VERIFICATION =================
+    // ================= REGISTER + SAVE TO REALTIME DB =================
     private void registerUser() {
         String email = etEmail.getText().toString().trim();
         String phone = etPhone.getText().toString().trim();
@@ -91,33 +100,49 @@ public class RegisterActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
 
                         FirebaseUser user = mAuth.getCurrentUser();
+                        if (user == null) return;
 
-                        if (user != null) {
-                            // 📩 KIRIM EMAIL VERIFIKASI
-                            user.sendEmailVerification()
-                                    .addOnCompleteListener(emailTask -> {
-                                        if (emailTask.isSuccessful()) {
-                                            Toast.makeText(this,
-                                                    "Registrasi berhasil! Silakan cek email untuk verifikasi.",
-                                                    Toast.LENGTH_LONG).show();
+                        String uid = user.getUid();
 
-                                            // Logout supaya tidak bisa login sebelum verifikasi
-                                            mAuth.signOut();
+                        // 📦 DATA USER
+                        Map<String, Object> userData = new HashMap<>();
+                        userData.put("email", email);
+                        userData.put("phone", phone);
+                        userData.put("verified", false);
+                        userData.put("createdAt", System.currentTimeMillis());
+                        userData.put("Role","User");
 
-                                            startActivity(new Intent(this, LoginActivity.class));
-                                            finish();
-                                        } else {
-                                            Toast.makeText(this,
-                                                    "Gagal mengirim email verifikasi",
-                                                    Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
-                        }
-
+                        // 🔥 SIMPAN KE REALTIME DATABASE
+                        userRef.child(uid).setValue(userData)
+                                .addOnSuccessListener(unused -> sendVerificationEmail(user))
+                                .addOnFailureListener(e ->
+                                        Toast.makeText(this,
+                                                "Gagal menyimpan data user",
+                                                Toast.LENGTH_SHORT).show());
                     } else {
                         Toast.makeText(this,
                                 "Registrasi gagal: " + task.getException().getMessage(),
                                 Toast.LENGTH_LONG).show();
+                    }
+                });
+    }
+
+    // ================= EMAIL VERIFICATION =================
+    private void sendVerificationEmail(FirebaseUser user) {
+        user.sendEmailVerification()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(this,
+                                "Registrasi berhasil! Silakan cek email untuk verifikasi.",
+                                Toast.LENGTH_LONG).show();
+
+                        mAuth.signOut();
+                        startActivity(new Intent(this, LoginActivity.class));
+                        finish();
+                    } else {
+                        Toast.makeText(this,
+                                "Gagal mengirim email verifikasi",
+                                Toast.LENGTH_SHORT).show();
                     }
                 });
     }

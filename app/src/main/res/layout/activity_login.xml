@@ -2,24 +2,28 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="24dp"
-    android:background="@color/white">
+    android:background="@color/white"
+    tools:context=".LoginActivity">
 
     <ImageView
         android:id="@+id/btnBack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
         android:src="@drawable/ic_arrow_back"
+        android:contentDescription="Kembali"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/btnHelp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
         android:src="@drawable/ic_help"
+        android:contentDescription="Bantuan"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -53,6 +57,7 @@
         android:layout_height="wrap_content"
         android:text="Email"
         android:textStyle="bold"
+        android:textColor="@color/black"
         android:layout_marginTop="32dp"
         app:layout_constraintTop_toBottomOf="@id/tvSubtitle"
         app:layout_constraintStart_toStartOf="parent" />
@@ -68,7 +73,7 @@
         android:inputType="textEmailAddress"
         android:drawableStart="@drawable/ic_email"
         android:drawablePadding="12dp"
-        android:textColor="#000"
+        android:textColor="@color/black"
         app:layout_constraintTop_toBottomOf="@id/lblEmail" />
 
     <TextView
@@ -77,6 +82,7 @@
         android:layout_height="wrap_content"
         android:text="Password"
         android:textStyle="bold"
+        android:textColor="@color/black"
         android:layout_marginTop="20dp"
         app:layout_constraintTop_toBottomOf="@id/etEmail"
         app:layout_constraintStart_toStartOf="parent" />
@@ -93,7 +99,7 @@
         android:drawableStart="@drawable/ic_lock"
         android:drawableEnd="@drawable/ic_eye_of"
         android:drawablePadding="12dp"
-        android:textColor="#000"
+        android:textColor="@color/black"
         app:layout_constraintTop_toBottomOf="@id/lblPassword" />
 
     <TextView
@@ -103,7 +109,8 @@
         android:text="Lupa Password?"
         android:textColor="#1A66FF"
         android:textStyle="bold"
-        android:layout_marginTop="12dp"
+        android:padding="8dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintTop_toBottomOf="@id/etPassword"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -116,6 +123,7 @@
         android:backgroundTint="#1A66FF"
         android:textColor="@color/white"
         android:textSize="16sp"
+        android:textStyle="bold"
         android:layout_marginTop="32dp"
         app:layout_constraintTop_toBottomOf="@id/tvForgotPassword" />
 
@@ -140,15 +148,14 @@
             android:layout_height="wrap_content"
             android:text="Daftar Sekarang"
             android:textColor="#1A66FF"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:padding="4dp"/>
     </LinearLayout>
 
-    <!-- ================= FRAGMENT CONTAINER ================= -->
-    <!-- 🔥 WAJIB ADA (OVERLAY FULL SCREEN) -->
     <FrameLayout
         android:id="@+id/fragment_container"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:background="@color/white"
         android:clickable="true"
         android:focusable="true"
@@ -156,6 +163,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

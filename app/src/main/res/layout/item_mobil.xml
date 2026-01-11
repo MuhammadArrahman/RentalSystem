@@ -11,41 +11,59 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="12dp">
+        android:orientation="horizontal"
+        android:padding="12dp"
+        android:gravity="center_vertical">
 
-        <TextView
-            android:id="@+id/tvMerk"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Toyota"
-            android:textStyle="bold"
-            android:textSize="16sp"/>
+        <!-- ICON MOBIL -->
+        <ImageView
+            android:id="@+id/imgMobil"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="12dp"
+            android:src="@drawable/ic_armada"/>
 
-        <TextView
-            android:id="@+id/tvTipe"
-            android:layout_width="wrap_content"
+        <!-- INFO MOBIL -->
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Avanza"/>
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tvPlat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="DT 1234 XX"/>
+            <TextView
+                android:id="@+id/tvMerk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Toyota"
+                android:textStyle="bold"
+                android:textSize="16sp"/>
 
-        <TextView
-            android:id="@+id/tvHarga"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Rp 300.000"/>
+            <TextView
+                android:id="@+id/tvTipe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Avanza"/>
 
-        <TextView
-            android:id="@+id/tvStatus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tersedia"
-            android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/tvPlat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DT 1234 XX"/>
+
+            <TextView
+                android:id="@+id/tvHarga"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rp 300.000"/>
+
+            <TextView
+                android:id="@+id/tvStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tersedia"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 

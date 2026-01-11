@@ -40,11 +40,24 @@ public class MobilAdapter extends RecyclerView.Adapter<MobilAdapter.ViewHolder> 
         holder.tvHarga.setText(mobil.getHarga());
         holder.tvStatus.setText(mobil.getStatus());
 
-        // Warna status
-        if (mobil.getStatus().equalsIgnoreCase("tersedia")) {
-            holder.tvStatus.setTextColor(Color.parseColor("#12B76A")); // hijau
-        } else {
-            holder.tvStatus.setTextColor(Color.parseColor("#B54708")); // coklat
+        // 🎨 WARNA STATUS
+        String status = mobil.getStatus().toLowerCase();
+
+        switch (status) {
+            case "tersedia":
+                holder.tvStatus.setTextColor(Color.parseColor("#12B76A")); // hijau
+                break;
+
+            case "disewa":
+                holder.tvStatus.setTextColor(Color.parseColor("#F79009")); // oranye
+                break;
+
+            case "servis":
+                holder.tvStatus.setTextColor(Color.parseColor("#D92D20")); // merah
+                break;
+
+            default:
+                holder.tvStatus.setTextColor(Color.GRAY);
         }
     }
 
@@ -53,11 +66,11 @@ public class MobilAdapter extends RecyclerView.Adapter<MobilAdapter.ViewHolder> 
         return mobilList.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvMerk, tvTipe, tvPlat, tvHarga, tvStatus;
 
-        public ViewHolder(@NonNull View itemView) {
+        ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvMerk   = itemView.findViewById(R.id.tvMerk);
             tvTipe   = itemView.findViewById(R.id.tvTipe);

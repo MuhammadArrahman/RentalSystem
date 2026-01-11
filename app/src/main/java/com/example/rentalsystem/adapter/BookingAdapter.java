@@ -21,7 +21,7 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.ViewHold
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // Layout item_booking_card adalah layout kecil untuk baris list
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_booking, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.booking_item , parent, false);
         return new ViewHolder(v);
     }
 
