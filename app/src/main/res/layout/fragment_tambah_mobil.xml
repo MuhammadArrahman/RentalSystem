@@ -1,318 +1,184 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F8F9FD"
-    android:orientation="vertical">
+    android:background="#F8F9FA">
 
-    <RelativeLayout
+    <!-- HEADER -->
+    <LinearLayout
+        android:id="@+id/headerBar"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="?attr/actionBarSize"
         android:background="@android:color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
         android:paddingHorizontal="16dp">
+
         <ImageView
             android:id="@+id/btnBack"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_centerVertical="true"
-            android:src="@drawable/ic_arrow_back"
-            app:tint="#101828" />
+            android:src="@drawable/ic_close" />
+
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
+            android:layout_weight="1"
+            android:gravity="center"
             android:text="Tambah Mobil"
-            android:textColor="#101828"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-    </RelativeLayout>
+            android:textStyle="bold"
+            android:textSize="18sp" />
+    </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_height="match_parent"
+        android:layout_below="@id/headerBar"
+        android:layout_above="@id/containerButton"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="20dp">
+            android:padding="16dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Foto Mobil"
-                android:textColor="#101828"
-                android:textStyle="bold" />
-
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="180dp"
-                android:layout_marginTop="10dp"
-                app:cardBackgroundColor="@android:color/white"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="0dp"
-                app:strokeColor="#D0D5DD"
-                app:strokeWidth="1dp">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:orientation="vertical">
-                    <ImageView
-                        android:layout_width="44dp"
-                        android:layout_height="44dp"
-                        android:background="@drawable/bg_grey_tambah"
-                        android:padding="10dp"
-                        android:src="@drawable/ic_camera"
-                        app:tint="#1A56F0" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:text="Ketuk untuk unggah foto"
-                        android:textColor="#1A56F0"
-                        android:textSize="12sp" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="SPESIFIKASI UTAMA"
-                android:textColor="#1A56F0"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                android:letterSpacing="0.05" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="Nama Mobil"
-                android:textColor="#101828"
-                android:textStyle="bold" />
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/bg_edittext"
-                android:hint="Contoh: Toyota Avanza Veloz"
-                android:paddingHorizontal="16dp"
-                android:textSize="14sp" />
-
+            <!-- STATUS -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:orientation="horizontal">
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Merek"
-                        android:textColor="#101828"
-                        android:textStyle="bold" />
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="48dp"
-                        android:layout_marginTop="8dp"
-                        android:background="@drawable/bg_edittext"
-                        android:hint="Toyota"
-                        android:paddingHorizontal="16dp" />
-                </LinearLayout>
-                <View android:layout_width="16dp" android:layout_height="0dp" />
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Tahun Produksi"
-                        android:textColor="#101828"
-                        android:textStyle="bold" />
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="48dp"
-                        android:layout_marginTop="8dp"
-                        android:background="@drawable/bg_edittext"
-                        android:hint="2023"
-                        android:paddingHorizontal="16dp" />
-                </LinearLayout>
-            </LinearLayout>
+                android:gravity="center_vertical"
+                android:layout_marginBottom="12dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="DOKUMEN &amp; STATUS"
-                android:textColor="#1A56F0"
-                android:textSize="12sp"
-                android:textStyle="bold" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:orientation="horizontal">
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Transmisi"
-                        android:textColor="#101828"
-                        android:textStyle="bold" />
-                    <Spinner
-                        android:id="@+id/spinnerTransmisi"
-                        android:layout_width="match_parent"
-                        android:layout_height="48dp"
-                        android:layout_marginTop="8dp"
-                        android:background="@drawable/bg_edittext"
-                        android:paddingHorizontal="16dp" />
-                </LinearLayout>
-                <View android:layout_width="16dp" android:layout_height="0dp" />
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Bahan Bakar"
-                        android:textColor="#101828"
-                        android:textStyle="bold" />
-                    <Spinner
-                        android:id="@+id/spinnerBBM"
-                        android:layout_width="match_parent"
-                        android:layout_height="48dp"
-                        android:layout_marginTop="8dp"
-                        android:background="@drawable/bg_edittext"
-                        android:paddingHorizontal="16dp" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:orientation="horizontal">
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Masa STNK"
-                        android:textColor="#101828"
-                        android:textStyle="bold" />
-                    <EditText
-                        android:id="@+id/etSTNK"
-                        android:layout_width="match_parent"
-                        android:layout_height="48dp"
-                        android:layout_marginTop="8dp"
-                        android:background="@drawable/bg_edittext"
-                        android:drawableEnd="@drawable/ic_calender"
-                        android:focusable="false"
-                        android:hint="mm/dd/yyyy"
-                        android:paddingHorizontal="16dp" />
-                </LinearLayout>
-                <View android:layout_width="16dp" android:layout_height="0dp" />
-                <View android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" />
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="HARGA &amp; INFO"
-                android:textColor="#1A56F0"
-                android:textSize="12sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="Harga Sewa (per hari)"
-                android:textColor="#101828"
-                android:textStyle="bold" />
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/bg_edittext"
-                android:hint="Rp 0"
-                android:inputType="number"
-                android:paddingHorizontal="16dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="Deskripsi Mobil"
-                android:textColor="#101828"
-                android:textStyle="bold" />
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/bg_edittext"
-                android:gravity="top"
-                android:hint="Jelaskan kondisi fisik mobil..."
-                android:minHeight="100dp"
-                android:padding="16dp"
-                android:textSize="14sp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:background="@drawable/bg_info_blue"
-                android:padding="12dp"
-                android:gravity="center_vertical">
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/ic_info"
-                    app:tint="#1A56F0" />
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:text="Pastikan seluruh data, terutama dokumen legalitas dan kondisi mesin, diisi sesuai dengan fakta lapangan."
-                    android:textColor="#1A56F0"
-                    android:textSize="11sp" />
+                    android:layout_weight="1"
+                    android:text="Status Ketersediaan"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/black"/>
+
+                <Switch
+                    android:id="@+id/switchStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
             </LinearLayout>
+
+            <EditText
+                android:id="@+id/etNamaMobil"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/bg_input"
+                android:hint="Nama Mobil"
+                android:paddingHorizontal="12dp"
+                android:textSize="14sp"/>
+
+            <EditText
+                android:id="@+id/etMerek"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_input"
+                android:hint="Merek"
+                android:paddingHorizontal="12dp"
+                android:textSize="14sp"/>
+
+            <EditText
+                android:id="@+id/etModel"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_input"
+                android:hint="Model / Tipe"
+                android:paddingHorizontal="12dp"
+                android:textSize="14sp"/>
+
+            <EditText
+                android:id="@+id/etPlatNomor"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_input"
+                android:hint="Plat Nomor"
+                android:paddingHorizontal="12dp"
+                android:textSize="14sp"/>
+
+            <EditText
+                android:id="@+id/etHargaSewa"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_input"
+                android:hint="Harga Sewa"
+                android:inputType="number"
+                android:paddingHorizontal="12dp"
+                android:textSize="14sp"/>
+
+            <EditText
+                android:id="@+id/etTahun"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_input"
+                android:hint="Tahun"
+                android:inputType="number"
+                android:paddingHorizontal="12dp"
+                android:textSize="14sp"/>
+
+            <EditText
+                android:id="@+id/etTransmisi"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_input"
+                android:hint="Transmisi"
+                android:paddingHorizontal="12dp"
+                android:textSize="14sp"/>
+
+            <EditText
+                android:id="@+id/etDeskripsi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_input"
+                android:hint="Deskripsi"
+                android:minLines="3"
+                android:gravity="top"
+                android:padding="12dp"
+                android:textSize="14sp"/>
+
+            <EditText
+                android:id="@+id/etTerakhirServis"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_input"
+                android:hint="Terakhir Servis"
+                android:focusable="false"
+                android:paddingHorizontal="12dp"
+                android:textSize="14sp"/>
 
         </LinearLayout>
     </ScrollView>
 
-    <Button
-        android:id="@+id/btnSubmit"
+    <LinearLayout
+        android:id="@+id/containerButton"
+        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
-        android:layout_height="54dp"
-        android:layout_margin="16dp"
-        android:backgroundTint="#1A56F0"
-        android:text="Tambahkan Mobil"
-        android:textAllCaps="false"
-        android:textStyle="bold"
-        app:cornerRadius="10dp" />
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:padding="16dp">
 
-</LinearLayout>
+        <Button
+            android:id="@+id/btnSimpan"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="Tambah Mobil"
+            android:textAllCaps="false"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:backgroundTint="#2169E3"/>
+    </LinearLayout>
+
+</RelativeLayout>

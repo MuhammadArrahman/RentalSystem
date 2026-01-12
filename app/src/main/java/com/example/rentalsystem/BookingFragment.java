@@ -22,7 +22,7 @@ public class BookingFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         // 1. INFLATE layout yang baru saja Anda kirim (yang ada rvBooking-nya)
-        View view = inflater.inflate(R.layout.item_booking, container, false);
+        View view = inflater.inflate(R.layout.booking_item, container, false);
 
         // 2. Inisialisasi RecyclerView (Sekarang tidak akan NULL)
         rvBooking = view.findViewById(R.id.rvBooking);

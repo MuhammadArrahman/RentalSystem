@@ -1,0 +1,16 @@
+<resources>
+
+    <string-array name="transmisi_array">
+        <item>Pilih Transmisi</item>
+        <item>Manual</item>
+        <item>Automatic</item>
+    </string-array>
+
+    <string-array name="bbm_array">
+        <item>Pilih BBM</item>
+        <item>Bensin</item>
+        <item>Solar</item>
+        <item>Listrik</item>
+    </string-array>
+
+</resources>

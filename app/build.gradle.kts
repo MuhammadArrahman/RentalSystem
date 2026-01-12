@@ -39,7 +39,11 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:33.3.0"))
     implementation("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-firestore")
-    implementation("com.google.firebase:firebase-database") // ✅ REALTIME DB
+    implementation("com.google.firebase:firebase-database")
+    implementation ("com.google.firebase:firebase-database:20.3.0")
+    implementation ("com.midtrans:uikit:2.0.0")
+
+// ✅ REALTIME DB
 
     // ANDROIDX
     implementation(libs.appcompat)

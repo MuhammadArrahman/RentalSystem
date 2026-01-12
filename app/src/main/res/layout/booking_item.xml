@@ -1,75 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#F8F9FB"
-    android:orientation="vertical">
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        app:cardElevation="4dp">
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingHorizontal="16dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="Status Pesanan"
-                android:textColor="@android:color/black"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-        </RelativeLayout>
-    </androidx.cardview.widget.CardView>
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="8dp"
+    android:layout_marginHorizontal="16dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="4dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        android:orientation="horizontal"
-        android:padding="8dp">
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/ivMobilBooking"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/por" />
 
         <TextView
-            android:id="@+id/tabPending"
-            android:layout_width="0dp"
+            android:id="@+id/tvMerk"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:paddingVertical="12dp"
-            android:text="Pending"
-            android:textColor="#175CD3"
+            android:text="Merk Mobil"
             android:textStyle="bold"
-            android:background="@drawable/bg_tab_active" />
+            android:textSize="16sp"
+            android:layout_marginTop="8dp" />
 
         <TextView
-            android:id="@+id/tabBerjalan"
-            android:layout_width="0dp"
+            android:id="@+id/tvTipe"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:paddingVertical="12dp"
-            android:text="Berjalan"
-            android:textColor="#666666" />
+            android:text="Tipe Mobil"
+            android:textSize="14sp"
+            android:layout_marginTop="2dp" />
 
         <TextView
-            android:id="@+id/tabSelesai"
-            android:layout_width="0dp"
+            android:id="@+id/tvPlat"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:paddingVertical="12dp"
-            android:text="Selesai"
-            android:textColor="#666666" />
+            android:text="Plat Nomor"
+            android:textSize="14sp"
+            android:layout_marginTop="2dp" />
+
+        <TextView
+            android:id="@+id/tvHarga"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Harga / hari"
+            android:textColor="#2970FF"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginTop="4dp" />
+
+        <TextView
+            android:id="@+id/tvStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Status"
+            android:textSize="14sp"
+            android:layout_marginTop="4dp"
+            android:textStyle="bold" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnBooking"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Booking Sekarang"
+            android:layout_marginTop="12dp"
+            app:cornerRadius="12dp"
+            android:backgroundTint="#2970FF"
+            android:textColor="@android:color/white" />
     </LinearLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvBooking"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clipToPadding="false"
-        android:padding="16dp" />
-
-</LinearLayout>
+</androidx.cardview.widget.CardView>

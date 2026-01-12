@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:background="#F8F9FB">
 
+    <!-- Header -->
     <RelativeLayout
         android:id="@+id/headerDetail"
         android:layout_width="match_parent"
@@ -32,6 +33,7 @@
             android:textStyle="bold" />
     </RelativeLayout>
 
+    <!-- Content Scroll -->
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -44,6 +46,7 @@
             android:orientation="vertical"
             android:padding="20dp">
 
+            <!-- Card Mobil -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -70,6 +73,7 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/tvMerkMobilDetail"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="MPV LUXURY"
@@ -78,6 +82,7 @@
                             android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/tvTipeMobilDetail"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Modern Hybrid Series"
@@ -86,6 +91,7 @@
                             android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/tvHargaMobilDetail"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Rp 850.000 / hari"
@@ -95,6 +101,7 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
+            <!-- Informasi Sewa -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -104,6 +111,7 @@
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
+            <!-- Tanggal Sewa -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -125,6 +133,7 @@
                         android:textSize="10sp" />
 
                     <TextView
+                        android:id="@+id/tvTanggalMulai"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
@@ -154,6 +163,7 @@
                         android:textSize="10sp" />
 
                     <TextView
+                        android:id="@+id/tvTanggalSelesai"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
@@ -165,6 +175,7 @@
                 </LinearLayout>
             </LinearLayout>
 
+            <!-- Metode Pembayaran Card -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -192,62 +203,28 @@
                         android:orientation="horizontal">
 
                         <LinearLayout
-                            android:layout_width="match_parent"
+                            android:id="@+id/layoutOnline"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="12dp"
-                            android:orientation="horizontal">
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_payment_selected"
+                            android:gravity="center"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:padding="12dp">
 
-                            <LinearLayout
-                                android:id="@+id/layoutOnline"
-                                android:layout_width="0dp"
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:src="@drawable/ic_wallet" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:background="@drawable/bg_payment_selected"
-                                android:gravity="center"
-                                android:clickable="true"
-                                android:focusable="true"
-                                android:padding="12dp">
-
-                                <ImageView
-                                    android:layout_width="24dp"
-                                    android:layout_height="24dp"
-                                    android:src="@drawable/ic_wallet" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="8dp"
-                                    android:text="Online"
-                                    android:textColor="@android:color/black"
-                                    android:textStyle="bold" />
-                            </LinearLayout>
-
-                            <Space
-                                android:layout_width="12dp"
-                                android:layout_height="wrap_content" />
-
-                            <LinearLayout
-                                android:id="@+id/layoutCash"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:background="@drawable/bg_input_field"
-                                android:gravity="center"
-                                android:clickable="true"
-                                android:focusable="true"
-                                android:padding="12dp">
-
-                                <ImageView
-                                    android:layout_width="24dp"
-                                    android:layout_height="24dp"
-                                    android:src="@drawable/ic_cash" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="8dp"
-                                    android:text="Tunai (Cash)" />
-                            </LinearLayout>
+                                android:layout_marginStart="8dp"
+                                android:text="Online"
+                                android:textColor="@android:color/black"
+                                android:textStyle="bold" />
                         </LinearLayout>
 
                         <Space
@@ -255,11 +232,14 @@
                             android:layout_height="wrap_content" />
 
                         <LinearLayout
+                            android:id="@+id/layoutCash"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:background="@drawable/bg_input_field"
                             android:gravity="center"
+                            android:clickable="true"
+                            android:focusable="true"
                             android:padding="12dp">
 
                             <ImageView
@@ -273,102 +253,15 @@
                                 android:layout_marginStart="8dp"
                                 android:text="Tunai (Cash)" />
                         </LinearLayout>
+
                     </LinearLayout>
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                app:cardCornerRadius="20dp"
-                app:cardElevation="0dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="20dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Ringkasan Biaya"
-                        android:textColor="@android:color/black"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Sewa (2 Hari)"
-                            android:textColor="#999999" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:text="Rp 1.700.000"
-                            android:textColor="@android:color/black" />
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Biaya Layanan"
-                            android:textColor="#999999" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:text="Rp 25.000"
-                            android:textColor="@android:color/black" />
-                    </RelativeLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginVertical="16dp"
-                        android:background="#EEEEEE" />
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Total Pembayaran"
-                            android:textColor="@android:color/black"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:text="Rp 1.725.000"
-                            android:textColor="#2970FF"
-                            android:textSize="18sp"
-                            android:textStyle="bold" />
-                    </RelativeLayout>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
+    <!-- Tombol Konfirmasi -->
     <LinearLayout
         android:id="@+id/layoutBottom"
         android:layout_width="match_parent"

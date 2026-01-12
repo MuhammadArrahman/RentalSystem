@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -22,48 +23,49 @@ public class FragmentBookingDetail extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_booking_detail, container, false);
 
-        // Inisialisasi View
         btnBack = view.findViewById(R.id.btnBack);
-        layoutOnline = view.findViewById(R.id.layoutOnline); // Pastikan ID ini ada di XML Anda
-        layoutCash = view.findViewById(R.id.layoutCash);     // Pastikan ID ini ada di XML Anda
+        layoutOnline = view.findViewById(R.id.layoutOnline);
+        layoutCash = view.findViewById(R.id.layoutCash);
         btnKonfirmasi = view.findViewById(R.id.btnKonfirmasi);
 
-        // Fungsi Tombol Kembali
+        TextView tvMerk = view.findViewById(R.id.tvMerkMobilDetail);
+        TextView tvTipe = view.findViewById(R.id.tvTipeMobilDetail);
+        TextView tvHarga = view.findViewById(R.id.tvHargaMobilDetail);
+
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            tvMerk.setText(bundle.getString("merk"));
+            tvTipe.setText(bundle.getString("tipe"));
+            tvHarga.setText(bundle.getString("harga"));
+        }
+
         btnBack.setOnClickListener(v -> {
-            if (getFragmentManager() != null) {
-                getFragmentManager().popBackStack();
+            if (getParentFragmentManager() != null) {
+                getParentFragmentManager().popBackStack();
             }
         });
 
-        // Logika Pindah Metode Pembayaran
         setupPaymentSelection();
 
-        // Fungsi Tombol Konfirmasi
-        btnKonfirmasi.setOnClickListener(v -> {
-            Toast.makeText(getContext(), "Pesanan Berhasil Dikonfirmasi!", Toast.LENGTH_SHORT).show();
-            // Di sini Anda bisa menambahkan logika pindah ke halaman Invoice/Success
-        });
+        btnKonfirmasi.setOnClickListener(v ->
+                Toast.makeText(getContext(), "Pesanan Berhasil Dikonfirmasi!", Toast.LENGTH_SHORT).show()
+        );
 
         return view;
     }
 
     private void setupPaymentSelection() {
-        // Default: Online terpilih (sesuai XML Anda)
-
         layoutOnline.setOnClickListener(v -> {
-            // Ubah background ke biru (selected)
             layoutOnline.setBackgroundResource(R.drawable.bg_payment_selected);
-            // Ubah background cash ke abu-abu (unselected)
             layoutCash.setBackgroundResource(R.drawable.bg_input_field);
         });
 
         layoutCash.setOnClickListener(v -> {
-            // Ubah background ke biru (selected)
             layoutCash.setBackgroundResource(R.drawable.bg_payment_selected);
-            // Ubah background online ke abu-abu (unselected)
             layoutOnline.setBackgroundResource(R.drawable.bg_input_field);
         });
     }

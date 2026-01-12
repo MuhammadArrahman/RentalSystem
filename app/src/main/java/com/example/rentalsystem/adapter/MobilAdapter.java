@@ -1,6 +1,5 @@
 package com.example.rentalsystem.adapter;
 
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,22 +10,23 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.rentalsystem.R;
 import com.example.rentalsystem.model.MobilModel;
+import com.google.android.material.button.MaterialButton;
 
 import java.util.List;
 
 public class MobilAdapter extends RecyclerView.Adapter<MobilAdapter.ViewHolder> {
 
     private List<MobilModel> mobilList;
+    private List<String> keyList;
     private OnItemClickListener listener;
 
-    // 🔥 INTERFACE CLICK
     public interface OnItemClickListener {
-        void onItemClick(MobilModel mobil);
+        void onItemClick(MobilModel mobil, String key);
     }
 
-    // 🔥 CONSTRUCTOR
-    public MobilAdapter(List<MobilModel> mobilList, OnItemClickListener listener) {
+    public MobilAdapter(List<MobilModel> mobilList, List<String> keyList, OnItemClickListener listener) {
         this.mobilList = mobilList;
+        this.keyList = keyList;
         this.listener = listener;
     }
 
@@ -41,6 +41,7 @@ public class MobilAdapter extends RecyclerView.Adapter<MobilAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         MobilModel mobil = mobilList.get(position);
+        String key = keyList.get(position);
 
         holder.tvMerk.setText(mobil.getMerk());
         holder.tvTipe.setText(mobil.getTipe());
@@ -48,27 +49,7 @@ public class MobilAdapter extends RecyclerView.Adapter<MobilAdapter.ViewHolder> 
         holder.tvHarga.setText(mobil.getHarga());
         holder.tvStatus.setText(mobil.getStatus());
 
-        // 🎨 WARNA STATUS
-        switch (mobil.getStatus().toLowerCase()) {
-            case "tersedia":
-                holder.tvStatus.setTextColor(Color.parseColor("#12B76A")); // hijau
-                break;
-            case "disewa":
-                holder.tvStatus.setTextColor(Color.parseColor("#F79009")); // oranye
-                break;
-            case "servis":
-                holder.tvStatus.setTextColor(Color.parseColor("#D92D20")); // merah
-                break;
-            default:
-                holder.tvStatus.setTextColor(Color.GRAY);
-        }
-
-        // 👉 CLICK ITEM
-        holder.itemView.setOnClickListener(v -> {
-            if (listener != null) {
-                listener.onItemClick(mobil);
-            }
-        });
+        holder.btnBooking.setOnClickListener(v -> listener.onItemClick(mobil, key));
     }
 
     @Override
@@ -76,17 +57,18 @@ public class MobilAdapter extends RecyclerView.Adapter<MobilAdapter.ViewHolder> 
         return mobilList.size();
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder {
-
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvMerk, tvTipe, tvPlat, tvHarga, tvStatus;
+        MaterialButton btnBooking;
 
-        ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvMerk   = itemView.findViewById(R.id.tvMerk);
-            tvTipe   = itemView.findViewById(R.id.tvTipe);
-            tvPlat   = itemView.findViewById(R.id.tvPlat);
-            tvHarga  = itemView.findViewById(R.id.tvHarga);
+            tvMerk = itemView.findViewById(R.id.tvMerk);
+            tvTipe = itemView.findViewById(R.id.tvTipe);
+            tvPlat = itemView.findViewById(R.id.tvPlat);
+            tvHarga = itemView.findViewById(R.id.tvHarga);
             tvStatus = itemView.findViewById(R.id.tvStatus);
+            btnBooking = itemView.findViewById(R.id.btnBooking);
         }
     }
 }

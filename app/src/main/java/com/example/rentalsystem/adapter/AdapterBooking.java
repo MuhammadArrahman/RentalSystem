@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,6 +13,7 @@ import com.example.rentalsystem.model.BookingModel;
 import java.util.List;
 
 public class AdapterBooking extends RecyclerView.Adapter<AdapterBooking.ViewHolder> {
+
     private List<BookingModel> list;
 
     public AdapterBooking(List<BookingModel> list) {
@@ -23,6 +23,7 @@ public class AdapterBooking extends RecyclerView.Adapter<AdapterBooking.ViewHold
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        // Gunakan layout item_booking_row atau item_booking sesuai yang kamu punya
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_booking, parent, false);
         return new ViewHolder(v);
     }
@@ -31,6 +32,7 @@ public class AdapterBooking extends RecyclerView.Adapter<AdapterBooking.ViewHold
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         BookingModel item = list.get(position);
 
+        // Set semua field
         holder.tvNamaUser.setText(item.getNamaUser());
         holder.tvBookingId.setText(item.getBookingId());
         holder.tvNamaMobil.setText(item.getNamaMobil());
@@ -40,7 +42,7 @@ public class AdapterBooking extends RecyclerView.Adapter<AdapterBooking.ViewHold
         holder.tvHargaTotal.setText(item.getHarga());
         holder.tvStatusBadge.setText(item.getStatus());
 
-        // Logika perubahan warna status (Opsional)
+        // Logika perubahan warna status dan tombol aksi
         if (item.getStatus().equalsIgnoreCase("Selesai")) {
             holder.tvStatusBadge.setTextColor(Color.parseColor("#12B76A"));
             holder.layoutButtons.setVisibility(View.GONE);
@@ -48,12 +50,19 @@ public class AdapterBooking extends RecyclerView.Adapter<AdapterBooking.ViewHold
             holder.tvStatusBadge.setTextColor(Color.parseColor("#B54708"));
             holder.layoutButtons.setVisibility(View.VISIBLE);
         }
+
+        // Jika mau, bisa tambahkan click listener tombol di sini
+        // contoh:
+        // holder.btnKiri.setOnClickListener(v -> { ... });
+        // holder.btnKanan.setOnClickListener(v -> { ... });
     }
 
     @Override
-    public int getItemCount() { return list.size(); }
+    public int getItemCount() {
+        return list.size();
+    }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvNamaUser, tvBookingId, tvStatusBadge, tvNamaMobil, tvPlatWarna, tvTanggal, tvDurasi, tvHargaTotal;
         Button btnKiri, btnKanan;
         View layoutButtons;
